@@ -1,0 +1,4 @@
+[plugin]
+description = "set custom container name based on a file"
+version = "2.0.0"
+[plugin.config]

@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# dokku-name 1.0.0
-
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 
 STDIN=$(cat)
@@ -14,9 +12,9 @@ if [[ -f "$NAME_FILE_PATH" ]]; then
   dokku cleanup
   # need to wait, docker doesn't appear to do this immediately
   sleep 2
-  COUNT=`cat $NAME_FILE_PATH | wc -w`
+  COUNT=$(wc -w $NAME_FILE_PATH)
   if [[ "$COUNT" -ne "1" ]]; then
-    echo "######> NAME file does not contain exactly one word" >&2
+    dokku_log_warn "NAME file does not contain exactly one word"
   else
     while read line
     do
